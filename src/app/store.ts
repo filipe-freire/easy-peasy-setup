@@ -19,7 +19,7 @@ interface TodosList {
 }
 
 export interface StoreModel {
-  counter: Counter;
+  counter?: Counter;
   todos: TodosList;
 }
 

@@ -11,9 +11,12 @@ function App() {
   //? EASY-PEASY SECTION
 
   //? Counter
+  //@ts-ignore
   const counter = useStoreState((s) => s.counter.value);
 
+  //@ts-ignore
   const incrementCounter = useStoreActions((a) => a.counter.incrementCounter);
+  //@ts-ignore
   const decrementCounter = useStoreActions((a) => a.counter.decrementCounter);
 
   //? Todos
