@@ -1,4 +1,5 @@
 import { Action, action, createStore } from "easy-peasy";
+import { v4 as uuidv4 } from "uuid";
 
 interface Counter {
   value: number;
@@ -6,8 +7,20 @@ interface Counter {
   decrementCounter: Action<Counter, number>;
 }
 
+interface Todo {
+  id: string;
+  body: string;
+}
+
+interface TodosList {
+  currentTodos: Todo[];
+  addTodo: Action<TodosList, Todo>;
+  removeTodo: Action<TodosList, string>;
+}
+
 export interface StoreModel {
   counter: Counter;
+  todos: TodosList;
 }
 
 export const store = createStore<StoreModel>({
@@ -18,6 +31,15 @@ export const store = createStore<StoreModel>({
     }),
     decrementCounter: action((s, p) => {
       s.value -= p;
+    }),
+  },
+  todos: {
+    currentTodos: [],
+    addTodo: action((s, p) => {
+      s.currentTodos.push(p);
+    }),
+    removeTodo: action((s, todoId) => {
+      s.currentTodos = s.currentTodos.filter((todo) => todo.id !== todoId);
     }),
   },
 });
